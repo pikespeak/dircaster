@@ -1,0 +1,42 @@
+Required Remote Media Values:
+=============================================================
+   [enclosureURL]
+   [enclosureLength]
+
+Highly Suggested Remote Media Values:
+=============================================================
+   [enclosureFileType]
+   [duration] Otherwise 00:00:00 is used
+   [title] Appearance. Otherwise text file name is used and clocking will point
+           to the media file
+   [pubDate] So the text file can be moved around without causing a re-publish
+           of the date
+
+Suggested Remote Media Values:
+=============================================================
+   [link] A web page, a home page, episode page
+   [artist]
+   [album]
+   [author]
+   [summary]
+   [keywords]
+   [subtitle]
+
+   One, but not both of these values should be used:
+=============================================================
+   [commentText] Text, no HTML
+   [commentCDATA] Text or valid HTML
+
+   For an image file if $imageItemTAG in conf_inc.php is = 'yes'
+   Can be done in [commentCDATA] with a valid HTML <image> tag
+   This causes the Feed Validator to give an error, even though
+   RSS and iTunes documentation says it is OK.
+
+   [allowItemImage]
+   [imageURL]
+   [imageTitle]
+   [imageFileType]
+
+Most likely not needed, one is generated with isPermaLink = false
+==================================================================
+   [guid]

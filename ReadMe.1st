@@ -1,0 +1,247 @@
+============================================================================
+ DirCaster 0.9j, released 02/01/2013. http://www.DirCaster.org
+ Dr. Bill Bailey, DirCaster Maintainer - DrBill@DrBillBailey.NET
+============================================================================
+
+NOTES:
+
+ Open Source code but please leave all references to prior work intact
+ when making changes.
+
+ Current maintainer: Dr. Bill Bailey - DrBill@DrBillBailey.NET
+
+ Based on the original DirCaster by Ryan King (http://www.shadydentist.com)
+ ID3v2.x tag support added by Warren Stone <fasttr@gmail.com> and
+ utilizing getid3 library by James Heinrich <info@getid3.org>,
+ http://www.getid3.org. iTunes specific tag support by Warren Stone
+ need to include the code to read id3 tags also reads lots of different formats
+ we'll implement mp3, mpa (quicktime), asf (wma) and riff (wav/avi)
+ alter the path to your getid3 directory location
+ 
+============================================================================
+   ChangeLog for DirCaster Version 0.9j
+============================================================================
+ 2013-02-01 - Henry Ratliff - hlratliff@comcast.net
+ 2013-02-01 - Dr. Bill Bailey - DrBill@DrBillBailey.NET
+ 
+ Added the capability to EDIT the override .txt files via a web interface.
+ You may now go to: http://yourdomain.com/dircaster/override.php and edit
+ the override files (your URL will vary, of course.)  Be sure to set your
+ file attributes to allow writing.  Please read all notes, and other
+ documentation to fully understand this new function.
+ 
+ NOTE: In the file override.php - check location for jquery! (Search file
+ for the term "jquery" and read note.)
+ 
+============================================================================
+   ChangeLog for DirCaster Version 0.9i
+============================================================================
+ 2012-09-01 - Henry Ratliff - hlratliff@comcast.net
+ 2012-09-01 - Dr. Bill Bailey - DrBill@DrBillBailey.NET
+ 
+ Added "The Cloud Option" - A method of allowing media files to be stored in
+ another location than in the DirCaster directory, for insatnce, in a Cloud
+ storage location, like Amazon S3.  This would also allow the use of Amazon
+ Cloudfront to better distribute media world-wide.
+ 
+ The override '.txt' tag [enclosureURL] DID NOT WORK in previous versions,
+ it has been corrected in this new (.9i) version.
+ 
+ Optional: Made a sub-directory for the override text files I used
+ 'override_files' but, it can be configured. Placing all the files here makes
+ things cleaner and avoids any problems with other types of text files.
+ You can leave them in the DirCaster root, but rename any other .txt files \
+ from the directory you choose.
+
+ These variables are new to config_inc.php
+     $remoteMedia = 1;  //1= remote, 0= current method
+     $overrideFileType = '.txt';
+     $overrideFolder = './override_files'. '/';
+
+ You should be able to add these to any existing config_inc.php file
+ to avoid re-doing the old config file.
+
+ See the included config_inc.php file for new installations, and documentation.
+
+ When using $remoteMedia = 1
+ Make sure to use the following variables
+ All these values are the same:
+     [link]http://yourmedialocation.yourdomain.com/yourfilename.m4v
+     [enclosureURL]http://yourmedialocation.yourdomain.com/yourfilename.m4v
+     [guid]http://yourmedialocation.yourdomain.com/yourfilename.m4v
+
+ You may use these new tags. The program will skip them if not valued:
+     [enclosureLength]10
+     [enclosureType]video/quicktime
+
+ For a $remoteMedia = 1
+ You should remove any media files, unless you point to them in an override
+ text file. With  $remoteMedia = 1, media can be anywhere including local to
+ dircaster.php (full URL, not a relative path)
+
+ $enclosurePrefix still works the same as before. 
+ 
+============================================================================
+   ChangeLog for DirCaster Version 0.9h
+============================================================================
+ 2011-10-05 - Henry Ratliff - hlratliff@comcast.net
+ 2011-10-05 - Dr. Bill Bailey - DrBill@DrBillBailey.NET
+ 
+   Fixed an issue that caused newer versions of PHP to break DirCaster's 
+   ability to display the description of a file from the later (new) version
+   of getid3 (getid3-1.9.1-20110810) - also fixed a date issue. Please be
+   sure that the timezone is specified in your php.ini, i.e. =
+   date.timezone = "America/New_York" 
+============================================================================
+   ChangeLog for DirCaster Version 0.9g
+============================================================================
+ 2011-06-24 - Lars Hermerschmidt - lars@g2k.de
+ 
+    . Added the ability to specify a separate directory for media files
+      Look for this section in config_inc.php
+  // The directory where the podcast data is located. This has to be relative
+  // to the directory of dircast, as it has to be accessable from clients.
+    $mediaDir       = ".";
+    . Numerous bug fixes
+============================================================================
+   ChangeLog for DirCaster Version 0.9f
+============================================================================
+   2009-02-09 - Henry L. Ratliff - hlratliff@comcast.net
+    . Added logic to increase or decrease web server time by 1 hour
+      Can be used in case of bad web server times due to annual time shifts
+      See note in config_inc.php
+============================================================================
+   ChangeLog for DirCaster Version 0.9e
+============================================================================
+   2008-02-14 - Henry L. Ratliff - hlratliff@comcast.net
+    . Fixed a bug in displaying comments correctly.
+
+============================================================================
+   ChangeLog for DirCaster Version 0.9d
+============================================================================
+ 2007-11-13 - Jared Benedict - redjar@redjar.org
+  . Item duration code modified to handle media files with duration over
+    60 minutes.
+
+============================================================================
+ ChangeLog for DirCaster Version 0.9c
+==========================================================================
+ 2007-08-20 - Henry L. Ratliff - hlratliff@comcast.net
+  . added feature to allow setting enclosurePrefix variable to allow Stats
+    processing for external providers like TechPodcasts and Blubrry from Raw
+    Voice Media
+
+============================================================================
+ ChangeLog for DirCaster Version 0.9b
+============================================================================
+ 2007-04-09 - Henry L. Ratliff - hlratliff@comcast.net
+  . added in a guid change to allow for multiple files that had the same
+    file date in the feed, and identifies tham as "false" for permalinks
+
+============================================================================
+ ChangeLog for DirCaster Version 0.9a
+============================================================================
+ 2007-04-04 - Henry L. Ratliff - hlratliff@comcast.net
+  . added a test so that the ?ft=[filetype] would display ONLY files that
+    are listed in the "sftypes" list
+
+============================================================================
+ ChangeLog for DirCaster Version 0.9
+============================================================================
+ 2007-03-28 - Henry L. Ratliff - hlratliff@comcast.net
+  . Revised item GUID tag to be more unique (user forum request)
+  . Added channel keyword tag (user forum request)
+  . Aligned XML tag indent. Looks better when reviewing raw XML
+  . Added parameter to allow the selection of a single file type
+    dircaster.php?ft=[filetype]
+    Example
+     1. The default is no change
+        webroot.../dircaster.php
+         uses software define file types  "(.mp3 .m4a .m4b .asf .wma .avi .mov .mp4)"
+     2. Select all occurrences of a single file type in the directory
+        overrides file types in 1 above
+         webroot...dircaster.php?ft=mp4
+          or
+         webroot.../dircaster.php?ft=mp3
+         (no periods in front of file type)
+        Any one of the file types in 1 above can be used
+        This allows the feed to store multiple types in one directory,
+        and allows the subscriber to select only one type
+
+============================================================================
+ ChangeLog for DirCaster Version 0.8a
+============================================================================
+ 2007-01-09 - Henry L. Ratliff - hlratliff@comcast.net
+  . Added logic to obtain <item> overrides from a text file
+    See the override.1st file for details
+
+============================================================================
+ ChangeLog for DirCaster Version 0.7b
+============================================================================
+ 2007-01-03 - Dr. Bill Bailey - DrBill@DirCaster.org
+  . Fixed the same problem as "pubDate" for "LastBuildDate" in iTunes Feed
+    2007-01-03 Dr. Bill Bailey
+
+============================================================================
+ ChangeLog for DirCaster Version 0.7a
+============================================================================
+ 2006-12-25 -  Henry L. Ratliff hlratliff@comcast.net
+  . Fixed several PHP Notice errors issued when error level set to ALL
+  . Patched occasion where single digit day in pubdate sometimes
+    displayed for example '  1' instead of ' 01'. new function fixDat()
+  . Substituted RSS title tag value with file name when id3 title value
+    is empty. stripType() drops the file extension
+  . Corrected raw '&' in RSS title tag (use '&amp;' instead)
+  . Fixed variable name error which caused, the logic to produce only
+    a set number of feeds, not to work.  Controlled by $maxFeeds.
+
+ Many, many thanks to Henry from the DirCaster Maintainer!
+ 
+================================================================================
+
+INSTALLATION:
+
+UnZip the contents of the file DirCasterV09g.zip (which you MUST have already done to see this file!)
+
+Retain the directory structure of the Zip archive and FTP all the files and directory structure to your web server.  Your web server must be running at least PHP 4.
+
+Modify the contents of the file "config_inc.php" to reflect YOUR podcast information.  Please use the info included in the file ONLY as a guide to the structure of the information!  PLEASE FULLY READ ALL COMMENTS!
+
+If you are using Apache as your web server, and it is set up to use .htaccess files, you can create a .htaccess file for your directory on the server that points to either the dircaster.php file or to the index.php file, depending on how you want to present the MP3 files to the web.
+
+Now simply FTP your MP3 files (podcasts or VODcasts) in this same directory, and they will be "served out" via a valid RSS file.  Point your subscriptions to the directory on your web server and the dircaster.php file.  For example, my files are in a directory that the URL http://broadcast.wofm.org points to, so my RSS feed filename would be: http://broadcast.wofm.org/dircaster.php
+
+Your RSS feed may be checked by entering your URL into:
+
+http://feedvalidator.org
+
+BE SURE THAT YOUR MP3 FILES HAVE VALID ID3 INFORMATION!
+
+There is an excellent FREE tool called "MP3tag" located at:
+http://www.mp3tag.de/en/
+
+or, can use the MP3 Tag Tools available at:
+http://sourceforge.net/projects/massid3lib
+to fill in the appropriate information in your MP3 files.  
+
+Also, be sure to set up an .htaccess file in the directory (that is a file that controls Apache, you can get more information on it by Googling "htaccess")
+The contents of the .htaccess file should be:
+----------------------------------------
+DirectoryIndex dircaster.php
+php_value memory_limit 16M
+php_flag register_globals 1
+AddType audio/x-m4a m4a M4A
+AddType video/mp4 mp4 MP4
+AddType video/x-m4v m4v M4V
+AddType video/webm webm
+AddType audio/mpeg mp3 MP3
+AddType audio/playlist m3u M3U
+AddType audio/x-scpls pls PLS
+AddType application/x-ogg ogg OGG
+AddType audio/wav wav WAV
+----------------------------------------
+(Without the dashed lines)  Alternatively, you can add these Mime types to your web servers mime.types file.
+
+Enjoy podcasting to the web!  More information and a tutorial can be found at:
+
+http://www.DirCaster.org

@@ -1,0 +1,91 @@
+# For DirCaster.php - How to Use RSS Item Tag Overrides
+# Works for supported media files (see $sftypes)
+# 2007-01-09
+# Concepts
+# . RSS <Item> overrides occur only if a file with the same file name as the
+#   media file exists with a .txt extension. This can be changed in the code.
+# . If no override file exists, then DirCaster will use the previous
+#   logic and use either hard coded values or ID3 tag information when
+#   populated.
+# . The terms (in []) below refer to RSS <Item> tags only
+# . The terms below are applied as overrides only if present, not commented,
+#   and have a value. So the .txt file can contain only the desired terms
+#   or all terms either commented, with #, or with no value. They can
+#   appear in any order.
+# . Some terms provided are not currently used by DirCaster but are there
+#   for future enhancements.
+# . Some terms should be used with caution and some should not be used
+#   unless you test carefully. Such, as link. DirCaster looks for
+#   media files names. Overriding those names might not make sense.
+#
+# You can use the lines below for a template. I suggest you remove
+# any uneeded terms and comments from the actual file used.
+# 
+# REMEMBER that the Comment field is 255 characters in length. NO MORE!
+
+# the headline/article name - if not overidden, then the ID3 title value
+# or if empty, the file name minus the extension
+# <title> otherwise, ID3 title, also see [description] below
+[title]
+
+# <itunes:author> otherwise ID3 artist
+[artist]
+
+# <album> otherwise, ID3 album
+[album]
+
+# <author) otherwise, dircaster variable: ownerEmailTAG
+[author]
+
+# <itunes:summary> otherwise, ID3 comment
+[summary]
+
+# <itunes:keywords> otherwise DirCaster variable keywordTAG
+[keywords]
+
+# <itunes:subtitle> otherwise ID3 comment
+[subtitle]
+
+# <description>
+# otherwise title - album - artist
+# plain test
+[commentText]
+# HTML markup - creates '<![CDATA[...]]>'
+# overrides comentText, if populated
+[commentCDATA]
+
+#
+# only use if your know what your are dong
+#
+# <link> otherwise, URL of media file
+[link]
+
+# <pubDate> otherwise, current system date
+[pubDate]
+
+# <enclosure url ="..." length="..." type="..."  />
+# url of media fle, otherwise media file URL
+[enclosureURL]
+# length otherwise media fie size
+[enclosureLength]
+# type> otherwise media file extension
+[enclosureType]
+
+# <itunes:link rel="image" type="video/jpeg" href="url">title</itunes:link>
+# url otherwise DirCaster variable imageUrlTAG
+[imageURL]
+# title otherwise DirCaster variable imageTitleTAG
+[imageTitle]
+
+# <itunes:duration> otherwise ID3 duration
+[duration]
+
+# <guid> same as <link>
+[guid]
+
+# ID3 values not currently used in DirCaster
+[composer]
+[genre]
+[year]
+[track]
+[copyright]

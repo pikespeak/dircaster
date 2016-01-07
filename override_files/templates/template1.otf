@@ -1,0 +1,25 @@
+#Dircaster templete override file .otf
+
+#Media info
+[enclosureURL]Your Media URL
+[enclosureLength]Your Media Size
+[enclosureType]video/x-m4v
+[duration]Your Time Length
+
+#Podcast info
+[title]Template Title
+[link]Your Media URL
+[pubDate]Fri, 01 Feb 2013 13:30:00 EDT
+[subtitle]Your Subtitle
+[author]
+[album]
+[artist]Your Name
+[summary]Your Summary
+[keywords]
+[guid]
+[commentText]Your Comment Text
+[commentCDATA]
+[allowItemImage]
+[imageURL]
+[imageTitle]
+[imageFileType]

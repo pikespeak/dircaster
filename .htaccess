@@ -1,0 +1,9 @@
+DirectoryIndex dircaster.php
+AddType audio/x-m4a m4a M4A
+AddType video/mp4 mp4 MP4
+AddType video/x-m4v m4v M4V
+AddType audio/mpeg mp3 MP3
+AddType audio/playlist m3u M3U
+AddType audio/x-scpls pls PLS
+AddType application/x-ogg ogg OGG
+AddType audio/wav wav WAV

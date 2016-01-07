@@ -1,0 +1,223 @@
+<?php
+
+  /* override_notes.php
+   * Help notes for override.php
+  */
+
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+ <head>
+  <title>Notes for Override_notes.php</title>
+
+  <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+  <meta name="description" content="Override_notes.htm - Help notes for override.php )" />
+  <meta name="keywords" content="dircaster, poscasts" />
+  <meta name="author" content="H.L.Ratliff" />
+  <meta name="revised" content="<?php echo date( 'Y-m-d h:m:s', time());?>" scheme="YYYY-MM-DD H:M:S"/>
+  <meta name="language" content="en" />
+
+</head>
+
+<body>
+   <h1>Program: Override.php - Notes</h1>
+
+<div style="margin-left: 20px; margin-right: 20px;">
+  <pre>
+<b>The program</b>
+     Used to maintain override text files for Dircaster, if such are used.
+     Individual override values are not always required, so there is
+     no forced requirements. (I.e. you may save a file with validation errors)
+     Instead some helper validation has been provided.
+
+     This program uses AJAX (JSON format).
+      'Form submit' is suspended: data and validation are obtained via AJAX.
+      The connection between the PHP program, JavaScript and CSS is
+      tight.
+        . Changing a 'class' name may break this interaction.
+        . Changing an 'id' will most certainly break the program.
+
+     This program set:
+       override.php
+         override.js
+         override.css
+       override_ajax_json.php
+       override_ajax_util.php
+     This program must be in the same folder as it's parent program
+     set:
+       dircaster.php
+       config_inc.php.
+
+     Additionally:
+       . In config_inc.php, the variable $overrideFolder must be valued.
+       . There must be a sub-folder 'templates' under the folder
+         referenced by $overrideFolder in config_inc.php
+       . Static dropdowns are controlled by functions at the end of
+          the program. You can maintain such things as mine types and
+          time zone ( select-options) by adding or deleting from the
+          array at the top of each function.
+
+     At the initial writing:
+        . Development was done with EPHP error level _ALL. There should be no notices or warnings.
+        . The CSS validates
+        . The HTML validates
+          The screen layout was designed for 800x600.
+       Any future maintenance should try to keep this level of validation.
+
+
+
+<b>Basic Operation</b>
+ This program can create and maintain override text files. Additionally
+ it can save and read (borrow data) from a template file.
+
+ o Create a new file by starting with an empty file.
+   Enter a name (excluding extension) as the file name.
+ o Create a new file by borrowing from an existing override text file.
+   Choose an existing override text file from the dropdown.
+   Enter a new name.
+ o Create a new file by borrowing from a template.
+   Choose from the template dropdown.
+   You must enter a new name.
+ o Edit an existing file.
+   Choose from the override dropdown.
+   Keep teh same name.
+ o After saving a file, it may also be saved as a template.
+   You may also choose a new name.
+   Before saving the template, you may change field values.
+
+
+<b>Requirements vs. verification</b>
+
+       o The use of overrides is not required to generate a feed with Dircaster
+         if mp3 media is used and the ID3 tags have been valued.
+         The original Dircaster read MP3 id tags to read tag information.
+         Library routines are not available for other media.
+         Override files provide overrides for many MP3 tags and supply other tags
+         that cannot be obtained from the media.
+       o Some RSS readers, iTunes especially, provide more robust information.
+         Override files provide the ability to add these to the feed.
+       o Since overrides are not always required (Dircaster provides some defaults) and there are different
+         requirements by some readers, this Override Generator, does not impose any
+         restrictions.
+       o Instead of enforcing strong requirements, the program supplies helpers,
+         usually seen as Verify buttons.
+
+
+<b>  How used in Dircaster.</b>
+
+  Each component has additional help on the screen.
+
+  The item enclosure tag is made of three components.
+    . The [enclosureURL]
+      &lt;item&gt;&lt;enclosure&gt; href attribute.
+    . The [enclosureLength]
+      &lt;item&gt;&lt;enclosure&gt; length attribute.
+    . The [enclosureType]
+      &lt;item&gt;&lt;enclosure&gt; type attribute.
+
+    The [duration] is the duration for the iTuens time column.
+
+    Note: See [link] below.
+
+  The item title tag [title]
+    &lt;item&gt;&lt;title&gt;&gt;
+    Always code for remote mode. For non-remote it defaults to the file name.
+
+  The item link tag [link]
+    &lt;item&gt;&lt;link&gt;
+    This becomes the action when the title is clicked in RSS.
+    Either
+    . The media link.
+    . A web page.
+
+  The item pubDate tag [pubDate]
+    &lt;item&gt;&lt;pubDate&gt;
+    For remote operation this should always be coded.
+    For non-remote, it defaults to the media file date.
+
+    Hint: Always code this to avoid republishing if the files are
+    move to a server in another time zone.
+
+  The item iTunes subtitle tag [subtitle]
+    &lt;item&gt;&lt;itunes:subtitle&gt;
+
+  The item author tag [author]
+    &lt;item&gt;&lt;author&gt;
+
+  The [album]
+    Used with the title if a description is not given.
+
+  The [artist]
+    Used with the title if a description is not given.
+
+  The item itunes summary tag [summary]
+    &lt;item&gt;&lt;itunes:summary&gt;
+
+  The item itunes keywords tag [keywords]
+    &lt;item&gt;&lt;itunes:keywords&gt;
+
+  The item guid [guid]
+    &lt;item&gt;&lt;guid&gt;
+    This will default to the enclosureURL.
+
+  These two fields construct the item description tag
+    &lt;item&gt;&lt;description&gt;
+    . [commentText] - Plain text.
+    . [commentCDATA] - Allows HTML and text (XML CDATA)
+
+  The following fields make up the item itunes:link tag to supply an image
+    &lt;item&gt;&lt;itunes:link&gt;
+    Note: The Feed Validator gives an error for this tag. You many
+    want to use an HTML img tag in the commentCDATA.
+    . [allowItemImage]
+    . [imageURL]
+    . [imageTitle]
+    . [imageFileType]
+
+
+  </pre>
+</div>
+
+<?php
+@include_once( 'config_inc.php' );
+if ( isSet( $remoteMedia ) ){
+  $notes = '';
+  $notes .= '<h2 style="font-size: 18px;"><b>Your current settings for the control variables in config_inc.php (shared with dircaster.php)are: </b></h2>';
+  $notes .= '<p><b><i>remoteMedia: </i></b>' . $remoteMedia;
+    if ( $remoteMedia == 1 ){
+      $notes .= '<br />This means you MUST have an override file for each podcast/media you want to publish.';
+      $notes .= '<br />Your podcast/media files may be hosted anywhere local or remote, that gives access rights.';
+      $notes .= '<br />This program will read and write override files in "overrideFolder" with extension "overrideFileType". (see below)';
+    }else{
+      $notes .= '<br />This means you DO NOT need to user override files, but may to suppliment your RSS "item" information';
+  }
+  $notes .= '</p>';
+  $notes .= '<p><b><i>overrideFolder: </i></b>'   . $overrideFolder;
+  $notes .= '<br /> All override files must be in this folder';
+  $notes .= '<br /> You should also make a one-time task to make a sub-folder under this folder "templates" ' .
+            'for saving template override files.';
+  $notes .= '</p>';
+
+  $notes .= '<p><b><i>overrideFileType: </i></b>' . $overrideFileType;
+  $notes .= '<br /> Only override files with this extension will be considered.';
+  $notes .= '</p>';
+
+  $notes .= '<p><b><i>linkTAG: </i></b>' . $linkTAG;
+  $notes .= '<br /> This link is used for the Feed Validator and Browser validation options.';
+  $notes .= '</p>';
+
+  $notes .= '<br /><br />';
+
+  echo $notes;
+}// end if config_inc.php found
+
+?>
+</body>
+</html>
+
+<?php
+  /*
+   * end override_notes.php
+  */
+?>
